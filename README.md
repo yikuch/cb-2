@@ -23,8 +23,9 @@ Zur Lösung der Aufgaben steht für Sie dieses Repository mit
 - ein Unterverzeichnis c1-scanner für Aufgabe 1 mit 
   - einem vorgegebenen Makefile, 
   - einem Testprogramm testscanner.c und einer Header-Datei minako.h 
-  - sowie einer Testeingabe demorgan.c1 und der erwarteten Testausgabe demorgan.sol. 
+  - sowie einer Testeingabe demorgan.c1 und der erwarteten Testausgabe demorgan.sol 
 - die Dateien im Unterverzeichnis urlscanner für Aufgabe 2
+- der [Foliensatz](uebung2.pdf) vom letzten Jahr mit einer kurzen Einführung in reguläre Ausdrücke und flex 
 
 zur Verfügung.
 
