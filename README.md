@@ -38,7 +38,7 @@ Implementieren Sie mit Hilfe von flex einen Scanner, der in einem Eingabestrom b
 ### Aufgabenstellung
 Mittels flex sollen sie einen Scanner implementieren, der aus einem Eingabestrom die Token der Sprache C1 extrahiert.
 
-Die Lexik der Sprache C1 befindet sich hier. Zusätzlich sind folgende Punkte zu beachten:
+Die Lexik der Sprache C1 befindet sich [hier](https://amor.cms.hu-berlin.de/~kunert/lehre/material/c1-lexic.php). Zusätzlich sind folgende Punkte zu beachten:
 
 - wenn man den Scanner ohne Kommandozeilenparameter aufruft, soll er von stdin lesen, ansonsten aus der auf der Kommandozeile angegebenen Datei (dabei sollen eventuell auftauchende Dateizugriffsfehler abgefangen werden)
 - die Implementation befindet sich in der Datei minako-lexic.l
