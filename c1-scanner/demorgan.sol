@@ -127,7 +127,6 @@ Line:  28	Token: 273
 Line:  28	ID:     a
 Line:  28	Token: '*'
 Line:  28	FLOAT:  1.2
-Line:  28	ID:     f
 Line:  28	Token: ';'
 Line:  29	Token: '}'
 Line:  31	Token: 274
