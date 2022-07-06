@@ -17,8 +17,7 @@ Ebenfalls mit null Punkten werden alle Abgaben bewertet, die sich nicht exakt an
 > Bitte achten Sie bei Ihrer Implementation auf Speicherleckfreiheit bei korrekter Benutzung, d.h. bei paarweisem Aufruf von init() und release().
 
 ## Abgabemodus
-Die Quell- und Headerdateien sind in einem Git-Repository abzugeben. Darin sollen ausschließlich die Dateien minako-lexic.l und urlscanner.l enthalten sein. 
-
+Die Quell- und Headerdateien sind in einem Git-Repository abzugeben. 
 Zur Lösung der Aufgaben steht für Sie dieses Repository mit  
 - ein Unterverzeichnis c1-scanner für Aufgabe 1 mit 
   - einem vorgegebenen Makefile, 
