@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include "minako.h"
 
-
     
 %}
 
@@ -22,6 +21,15 @@ WORD {LETTER}+
 CONST_FLOAT {FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER})
 
 %%
+<<EOF>> {
+  
+    return -1; // Signalisiert das Ende der Eingabe
+}
+
+[ \t]* {}   /* Ignore whitespace */
+\n {}
+
+
 "/*"([^*]|(\*+[^*/]))*\*+\/ {}
 "//".* {}
 "&&"   {printf("Line:   %d	Token: 257 \n",yylineno);}
@@ -62,34 +70,13 @@ CONST_FLOAT {FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER})
 "\""[^\n\"]*"\"" {printf("Line:   %d	STRING: %s \n",yylineno,yytext);}
 ({LETTER})+({DIGIT}|{LETTER})* {printf("Line:   %d	ID: %s \n",yylineno,yytext);}
 
-\n {}
-" "* {}
-\t {}
+
 . {fprintf(stderr, "Fehler: Line %d nicht erlaubtes Zeichen: %s in c1.\n",yylineno,yytext);exit(-1);}
 
-
 %%
-yywrap() {}
-int main(int argc,char** argv)
-{
-  //printf("%d",argc);
-  //printf("%s",argv[2]);
-  if (argc != 2) {
-        yyin = stdin;
-    } else {
-        yyin = fopen(argv[1], "r");
-        if (yyin == 0) {
-            fprintf(
-                    stderr,
-                    "Fehler: Konnte Datei %s nicht zum lesen oeffnen.\n",
-                    argv[1]
-            );
-            exit(-1);
-        }
-    }
-  yylex();
-  return 0;
-    
-    
-
+int yywrap() {
+    /* Aktionen für das Ende der Datei */
+    return -1;  // Signalisiert das Ende der Analyse
 }
+
+
