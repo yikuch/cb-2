@@ -30,48 +30,48 @@ CONST_FLOAT {FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER})
 \n {}
 
 
-"/*"([^*]|(\*+[^*/]))*\*+\/ {}
-"//".* {}
-"&&"   {printf("Line:   %d	Token: 257 \n",yylineno);}
-"||" {printf("Line:   %d	Token: 258 \n",yylineno);}              
-"==" {printf("Line:   %d	Token: 259 \n",yylineno);}             
-"!=" {printf("Line:   %d	Token: 260 \n",yylineno);}
-"<=" {printf("Line:   %d	Token: 261 \n",yylineno);}
-">=" {printf("Line:   %d	Token: 262 \n",yylineno);}
-"<" {printf("Line:   %d	Token: 263 \n",yylineno);}            
-">" {printf("Line:   %d	Token: 264 \n",yylineno);}
-"bool" {printf("Line:   %d	Token: 265 \n",yylineno);}
-"do" {printf("Line:   %d	Token: 266 \n",yylineno);}           
-"else" {printf("Line:   %d	Token: 267 \n",yylineno);}         
-"float" {printf("Line:   %d	Token: 268 \n",yylineno);}
-"for" {printf("Line:   %d	Token: 269 \n",yylineno);}          
-"if" {printf("Line:   %d	Token: 270 \n",yylineno);}           
-"int" {printf("Line:   %d	Token: 271 \n",yylineno);}
-"printf" {printf("Line:   %d	Token: 272 \n",yylineno);}
-"return" {printf("Line:   %d	Token: 273 \n",yylineno);}
-"void" {printf("Line:   %d	Token: 274 \n",yylineno);} 
-"while" {printf("Line:   %d	Token: 275 \n",yylineno);}
-"(" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-")" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"*" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"/" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"+" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"-" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"{" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"}" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-";" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"," {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
-"=" {printf("Line:   %d	TOKEN: '%s' \n",yylineno,yytext);}
+"/*"([^*]|(\*+[^*/]))*\*+\/ {} //kommentare
+"//".* {} //einzeilige Kommentare
+"&&"   {return AND;}
+"||" {return OR;}              
+"==" {return EQ;}             
+"!=" {return NEQ;}
+"<=" {return LEQ;}
+">=" {return GEQ;}
+"<" {return LSS;}            
+">" {return GRT;}
+"bool" {return KW_BOOLEAN;}
+"do" {return KW_DO;}           
+"else" {return KW_ELSE;}         
+"float" {return KW_FLOAT;}
+"for" {return KW_FOR;}          
+"if" {return KW_IF;}           
+"int" {return KW_INT;}
+"printf" {return KW_PRINTF;}
+"return" {return KW_RETURN;}
+"void" {return KW_VOID;} 
+"while" {return KW_WHILE;}
+"(" {return 40;}
+")" {return 41;}
+"*" {return 42;}
+"/" {return 47;}
+"+" {return 43;}
+"-" {return 45;}
+"{" {return 123;}
+"}" {return 125;}
+";" {return 59;}
+"," {return 44;}
+"=" {return 61;}
 
 
-{DIGIT}+ {printf("Line:   %d	INT: %s \n",yylineno,yytext);}
-{FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER}) {printf("Line:   %d	FLOAT: %s \n",yylineno,yytext);}
-"true"|"false" {printf("Line:   %d	BOOL: %s \n",yylineno,yytext);}
-"\""[^\n\"]*"\"" {printf("Line:   %d	STRING: %s \n",yylineno,yytext);}
-({LETTER})+({DIGIT}|{LETTER})* {printf("Line:   %d	ID: %s \n",yylineno,yytext);}
+{DIGIT}+ {return CONST_INT;}
+{FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER}) {return CONST_FLOAT;}
+"true"|"false" {return CONST_BOOLEAN ;}
+"\""[^\n\"]*"\"" {return CONST_STRING;}
+({LETTER})+({DIGIT}|{LETTER})* {return  ID;}
 
 
-. {fprintf(stderr, "Fehler: Line %d nicht erlaubtes Zeichen: %s in c1.\n",yylineno,yytext);exit(-1);}
+. {fprintf(stderr, "Fehler: Line %d nicht erlaubtes Zeichen: %s in c1.\n",yylineno,yytext);exit(-1);} //default fuer alle anderen Zeichen
 
 %%
 int yywrap() {
