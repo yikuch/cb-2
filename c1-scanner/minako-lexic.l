@@ -64,11 +64,11 @@ CONST_FLOAT {FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER})
 "=" {return 61;}
 
 
-{DIGIT}+ {return CONST_INT;}
-{FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER}) {return CONST_FLOAT;}
+{DIGIT}+ {yylval.intValue = atoi(yytext);return CONST_INT;}
+{FLOAT}([eE]([-+])?{INTEGER})?|{INTEGER}([eE]([-+])?{INTEGER}) {yylval.floatValue = atof(yytext);return CONST_FLOAT;}
 "true"|"false" {return CONST_BOOLEAN ;}
-"\""[^\n\"]*"\"" {return CONST_STRING;}
-({LETTER})+({DIGIT}|{LETTER})* {return  ID;}
+"\""[^\n\"]*"\"" {yylval.string = strdup(yytext);return CONST_STRING;}
+({LETTER})+({DIGIT}|{LETTER})* {yylval.string = strdup(yytext);return  ID;}
 
 
 . {fprintf(stderr, "Fehler: Line %d nicht erlaubtes Zeichen: %s in c1.\n",yylineno,yytext);exit(-1);} //default fuer alle anderen Zeichen
